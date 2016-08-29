@@ -7,15 +7,17 @@ bool pr=true;
 int main(){
   int check;
   int cpid ;
+  int n;
+  cin>>n;
   //system("ps");
-  for(int i=0;i<3;i++){
+  for(int i=0;i<n;i++){
 
     cpid=fork();
 
     if(cpid==0){
 
       level++;
-      if(i==2){
+      if(i==n-1){
         cout<<"@ level = "<< level<<" PID =  "<<getpid()<<" PPID = "<<getppid()<<endl;
       }
 
