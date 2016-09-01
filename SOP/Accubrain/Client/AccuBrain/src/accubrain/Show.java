@@ -34,6 +34,9 @@ public class Show extends javax.swing.JFrame {
      * Creates new form Show
      */
     int index=0;
+    int imageDelay=1500;
+    int blankDelay=3000;
+    
     public Show() {
         initComponents();
         this.setAlwaysOnTop(true);
@@ -47,23 +50,24 @@ public class Show extends javax.swing.JFrame {
         
         final int[]arr=shuffleArray(3);
         
-        dis(xsize,ysize,1);
+        dis(xsize,ysize,666);
         
         
-        Timer timer = new Timer(2000, new ActionListener() {
+        Timer timer = new Timer(imageDelay, new ActionListener() {
             BufferedImage img=null;
             int counter=0;
             
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                System.out.println(((Timer)e.getSource()).getDelay()+"");
                 if(counter%2==0){
                 if(index<arr.length){
                     
-                    System.out.println(arr[index]+" ll"+arr.length);
+                    System.out.println(arr[index]+" Image");
                     dis(xsize,ysize,arr[index]);
                     index++;
                     counter++;
+                    ((Timer)e.getSource()).setDelay(blankDelay);
                     
                     
                 }
@@ -74,14 +78,16 @@ public class Show extends javax.swing.JFrame {
                 }
                 else{
                     System.out.println("Displaying blank");
-                    dis(xsize,ysize,999);
-                    System.out.println("Awake");
+                    dis(xsize,ysize,666);
+                   
                     counter++;
+                    ((Timer)e.getSource()).setDelay(imageDelay);
                 }
 
             }
             
         });
+        timer.setInitialDelay(1000);
         timer.start();
         
         
