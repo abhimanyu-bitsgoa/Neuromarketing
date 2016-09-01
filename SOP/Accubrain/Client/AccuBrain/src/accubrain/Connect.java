@@ -2,6 +2,7 @@ package accubrain;
 
 
 import accubrain.AccuBrain;
+import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -27,6 +28,15 @@ public class Connect extends javax.swing.JFrame {
      */
     public Connect() {
         initComponents();
+        
+        this.setAlwaysOnTop(true);
+        this.setResizable(false);
+        this.setVisible(true);
+        
+        Toolkit tk=Toolkit.getDefaultToolkit();
+        final int xsize=(int)tk.getScreenSize().getWidth();
+        final int ysize=(int)tk.getScreenSize().getHeight();
+        this.setSize(xsize,ysize);
     }
     String data;
     Socket clientSocket;
@@ -45,6 +55,7 @@ public class Connect extends javax.swing.JFrame {
         tf1 = new javax.swing.JTextField();
         b2 = new javax.swing.JButton();
         b3 = new javax.swing.JButton();
+        b4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,6 +87,13 @@ public class Connect extends javax.swing.JFrame {
             }
         });
 
+        b4.setText("Start");
+        b4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,6 +101,8 @@ public class Connect extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(b1)
+                .addGap(77, 77, 77)
+                .addComponent(b4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(b2)
                 .addGap(34, 34, 34))
@@ -99,10 +119,15 @@ public class Connect extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addComponent(tf1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(b1)
-                    .addComponent(b2))
-                .addGap(57, 57, 57)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(b1)
+                            .addComponent(b2))
+                        .addGap(57, 57, 57))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(b4)
+                        .addGap(34, 34, 34)))
                 .addComponent(b3)
                 .addContainerGap(109, Short.MAX_VALUE))
         );
@@ -152,6 +177,18 @@ public class Connect extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_b3ActionPerformed
 
+    private void b4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b4ActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+              
+                new Show().setVisible(true);
+                
+               
+            }
+        });
+        this.dispose();
+    }//GEN-LAST:event_b4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -191,6 +228,7 @@ public class Connect extends javax.swing.JFrame {
     private javax.swing.JButton b1;
     private javax.swing.JButton b2;
     private javax.swing.JButton b3;
+    private javax.swing.JButton b4;
     private javax.swing.JTextField tf1;
     // End of variables declaration//GEN-END:variables
 }

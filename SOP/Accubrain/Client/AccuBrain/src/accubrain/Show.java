@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 /**
@@ -36,60 +37,13 @@ public class Show extends javax.swing.JFrame {
     int index=0;
     int imageDelay=1500;
     int blankDelay=3000;
+    final int[]arr=Util.shuffleArray(3);
     
     public Show() {
         initComponents();
-        this.setAlwaysOnTop(true);
-        this.setResizable(false);
-        this.setVisible(true);
-        
-        Toolkit tk=Toolkit.getDefaultToolkit();
-        final int xsize=(int)tk.getScreenSize().getWidth();
-        final int ysize=(int)tk.getScreenSize().getHeight();
-        this.setSize(xsize,ysize);
-        
-        final int[]arr=shuffleArray(3);
-        
-        dis(xsize,ysize,666);
-        
-        
-        Timer timer = new Timer(imageDelay, new ActionListener() {
-            BufferedImage img=null;
-            int counter=0;
-            
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println(((Timer)e.getSource()).getDelay()+"");
-                if(counter%2==0){
-                if(index<arr.length){
-                    
-                    System.out.println(arr[index]+" Image");
-                    dis(xsize,ysize,arr[index]);
-                    index++;
-                    counter++;
-                    ((Timer)e.getSource()).setDelay(blankDelay);
-                    
-                    
-                }
-                else{
-                    
-                    ((Timer)e.getSource()).stop();
-                }
-                }
-                else{
-                    System.out.println("Displaying blank");
-                    dis(xsize,ysize,666);
-                   
-                    counter++;
-                    ((Timer)e.getSource()).setDelay(imageDelay);
-                }
-
-            }
-            
-        });
-        timer.setInitialDelay(1000);
-        timer.start();
-        
+        Util.setScreenDimensions();
+        Util.makeFullScreen(l1);
+        Util.dis(666,l1);
         
         
     }
@@ -104,14 +58,23 @@ public class Show extends javax.swing.JFrame {
     private void initComponents() {
 
         l1 = new javax.swing.JLabel();
+        b1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         l1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         l1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/accubrain/images/1.jpg"))); // NOI18N
+        l1.setBorder(null);
         l1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 l1MouseClicked(evt);
+            }
+        });
+
+        b1.setText("Act");
+        b1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b1ActionPerformed(evt);
             }
         });
 
@@ -119,11 +82,21 @@ public class Show extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(l1, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(405, Short.MAX_VALUE)
+                .addComponent(b1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(l1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(l1, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(l1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(99, 99, 99)
+                .addComponent(b1)
+                .addContainerGap(331, Short.MAX_VALUE))
         );
 
         pack();
@@ -142,6 +115,15 @@ public class Show extends javax.swing.JFrame {
               System.out.println("Right");
 	    }
     }//GEN-LAST:event_l1MouseClicked
+
+    private void b1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b1ActionPerformed
+         //Why works here?
+         //b1.setVisible(false);
+         Util.makeComponentFullScreen(l1);
+         Util.startExperiment(imageDelay, imageDelay, blankDelay, arr, l1);
+         this.remove(b1);   //Why set visible doesnt work
+         
+    }//GEN-LAST:event_b1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,42 +183,11 @@ public class Show extends javax.swing.JFrame {
     
     
 
-static int[]  shuffleArray(int range)
-  { 
-    // If running on Java 6 or older, use `new Random()` on RHS here 
-    int[] ar=new int[range];
-    for(int i=0;i<range;i++){
-        ar[i]=i+1;
-    }
-    Random rnd = ThreadLocalRandom.current();
-    for (int i = ar.length - 1; i > 0; i--)
-    { 
-      int index = rnd.nextInt(i + 1);
-      // Simple swap 
-      int a = ar[index];
-      ar[index] = ar[i];
-      ar[i] = a;
-    } 
-    for(int i=0;i<ar.length;i++)
-        System.out.println(ar[i]+" ");
-    return ar;
-  } 
 
-public void dis(int xsize,int ysize,int imageID){
 
-        try {
-            BufferedImage img = null;
-            
-            img = ImageIO.read(getClass().getResourceAsStream("/accubrain/images/"+imageID+".jpg"));
-            Image dimg = img.getScaledInstance(xsize, ysize,Image.SCALE_SMOOTH);
-            ImageIcon imageIcon = new ImageIcon(dimg);
-            l1.setIcon(imageIcon);
-        } catch (IOException ex) {
-            Logger.getLogger(Show.class.getName()).log(Level.SEVERE, null, ex);
-        }
-}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton b1;
     private javax.swing.JLabel l1;
     // End of variables declaration//GEN-END:variables
 }
