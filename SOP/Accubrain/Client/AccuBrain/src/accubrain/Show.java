@@ -12,9 +12,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import static java.lang.Thread.sleep;
+import java.net.Socket;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
@@ -22,6 +24,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
@@ -37,13 +40,21 @@ public class Show extends javax.swing.JFrame {
     int index=0;
     int imageDelay=1500;
     int blankDelay=3000;
-    final int[]arr=Util.shuffleArray(3);
+    
+    String data;
+    Socket clientSocket;
+    DataOutputStream outToServer;
+    String IPAddress="192.168.100.3";
+    int portNumber=6789;
+    
+     String arr[];
     
     public Show() {
+        this.arr = Util.shuffleArray(7, this);
         initComponents();
         Util.setScreenDimensions();
         Util.makeFullScreen(l1);
-        Util.dis(666,l1);
+        Util.dis("666",l1);
         
         
     }
@@ -58,12 +69,18 @@ public class Show extends javax.swing.JFrame {
     private void initComponents() {
 
         l1 = new javax.swing.JLabel();
-        b1 = new javax.swing.JButton();
+        start = new javax.swing.JButton();
+        connectionButton = new javax.swing.JButton();
+        DisconnectButton = new javax.swing.JButton();
+        tip = new javax.swing.JTextField();
+        tport = new javax.swing.JTextField();
+        l2 = new javax.swing.JLabel();
+        l3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         l1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        l1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/accubrain/images/1.jpg"))); // NOI18N
+        l1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/accubrain/images/666.jpg"))); // NOI18N
         l1.setBorder(null);
         l1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -71,32 +88,77 @@ public class Show extends javax.swing.JFrame {
             }
         });
 
-        b1.setText("Act");
-        b1.addActionListener(new java.awt.event.ActionListener() {
+        start.setText("Start Experiment");
+        start.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                b1ActionPerformed(evt);
+                startActionPerformed(evt);
             }
         });
+
+        connectionButton.setText("Connect");
+        connectionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                connectionButtonActionPerformed(evt);
+            }
+        });
+
+        DisconnectButton.setText("Disconnect");
+        DisconnectButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DisconnectButtonActionPerformed(evt);
+            }
+        });
+
+        tip.setText("192.168.100.3");
+
+        tport.setText("6789");
+
+        l2.setText("IP");
+
+        l3.setText("Port");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(405, Short.MAX_VALUE)
-                .addComponent(b1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
-            .addGroup(layout.createSequentialGroup()
                 .addComponent(l1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(l2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tip, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                .addComponent(l3)
+                .addGap(18, 18, 18)
+                .addComponent(tport, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(161, 161, 161)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(start, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                    .addComponent(connectionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(DisconnectButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(l1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99)
-                .addComponent(b1)
-                .addContainerGap(331, Short.MAX_VALUE))
+                .addGap(74, 74, 74)
+                .addComponent(connectionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(start, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(DisconnectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tip, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tport, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(l2)
+                    .addComponent(l3))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         pack();
@@ -105,25 +167,73 @@ public class Show extends javax.swing.JFrame {
     private void l1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_l1MouseClicked
         if(evt.getButton() == MouseEvent.BUTTON1)
 	    {
-	      l1.setText("Detected Mouse Left Click!");
+	      data=Util.currenImageID+"R";
               System.out.println("Left");
               
 	    }	    
 	    else if(evt.getButton() == MouseEvent.BUTTON3)
 	    {
-	      l1.setText("Detected Mouse Right Click!");
+	      data=Util.currenImageID+"F";
               System.out.println("Right");
 	    }
+        
+        try {
+            
+            //outToServer = new DataOutputStream(clientSocket.getOutputStream());
+            outToServer.writeBytes(data + '\n');
+            outToServer.flush();
+           
+        } catch (IOException ex) {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
     }//GEN-LAST:event_l1MouseClicked
 
-    private void b1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b1ActionPerformed
+    private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
          //Why works here?
          //b1.setVisible(false);
          Util.makeComponentFullScreen(l1);
          Util.startExperiment(imageDelay, imageDelay, blankDelay, arr, l1);
-         this.remove(b1);   //Why set visible doesnt work
+         this.remove(start);   //Why set visible doesnt work
+         this.remove(connectionButton);
+         this.remove(DisconnectButton);
+         this.remove(tip);
+         this.remove(tport);
+         this.remove(l2);
+         this.remove(l3);
          
-    }//GEN-LAST:event_b1ActionPerformed
+    }//GEN-LAST:event_startActionPerformed
+
+    private void connectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectionButtonActionPerformed
+        IPAddress= tip.getText();
+        
+        portNumber= Integer.parseInt(tport.getText());
+ 
+        
+        try {
+            
+            clientSocket = new Socket(IPAddress, portNumber);
+            outToServer = new DataOutputStream(clientSocket.getOutputStream());
+            
+        } catch (IOException ex) {
+            Logger.getLogger(AccuBrain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+    }//GEN-LAST:event_connectionButtonActionPerformed
+
+    private void DisconnectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisconnectButtonActionPerformed
+        try {
+            outToServer.writeBytes("#" + '\n');
+            outToServer.flush();
+            clientSocket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_DisconnectButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,7 +297,13 @@ public class Show extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton b1;
+    private javax.swing.JButton DisconnectButton;
+    private javax.swing.JButton connectionButton;
     private javax.swing.JLabel l1;
+    private javax.swing.JLabel l2;
+    private javax.swing.JLabel l3;
+    private javax.swing.JButton start;
+    private javax.swing.JTextField tip;
+    private javax.swing.JTextField tport;
     // End of variables declaration//GEN-END:variables
 }

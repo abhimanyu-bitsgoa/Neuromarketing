@@ -11,7 +11,12 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
@@ -31,6 +36,7 @@ public class Util {
     
     static int xsize=100;
     static int ysize=100;
+    static String currenImageID;
     
     public static void setScreenDimensions(){
         
@@ -55,9 +61,10 @@ public class Util {
     }
     
     
-    public static void dis(int imageID,JLabel l1){
+    public static void dis(String imageID,JLabel l1){
 
         try {
+            currenImageID=imageID;
             BufferedImage img = null;
             img = ImageIO.read(l1.getClass().getResourceAsStream("/accubrain/images/"+imageID+".jpg"));
             Image dimg = img.getScaledInstance(xsize, ysize,Image.SCALE_SMOOTH);
@@ -69,28 +76,46 @@ public class Util {
 }
     
     
-    public static int[]  shuffleArray(int range)
+    public static String[]  shuffleArray(int range,Component l1)
   { 
-    
-    int[] ar=new int[range];
-    for(int i=0;i<range;i++){
-        ar[i]=i+1;
-    }
-    Random rnd = ThreadLocalRandom.current();
-    for (int i = ar.length - 1; i > 0; i--)
-    { 
-      int index = rnd.nextInt(i + 1);
-      // Simple swap 
-      int a = ar[index];
-      ar[index] = ar[i];
-      ar[i] = a;
-    } 
-    for(int i=0;i<ar.length;i++)
-        System.out.println(ar[i]+" ");
-    return ar;
+            String [] ar=new String [range];
+            BufferedReader br = new BufferedReader(new InputStreamReader(Show.class.getResourceAsStream("/accubrain/images/")));
+            String fileName;
+            int k=0;
+        try {
+            while((fileName = br.readLine()) != null){
+                if(fileName.substring(0,3).equals("666")){
+                    continue;
+                }
+                ar[k++]=fileName.substring(0,3);
+                //System.out.println(fileName.substring(0,3));
+                
+            }
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+            
+           
+            Random rnd = ThreadLocalRandom.current();
+            for (int i = ar.length - 1; i > 0; i--)
+            {
+                int index = rnd.nextInt(i + 1);
+                // Simple swap
+                String a = ar[index];
+                ar[index] = ar[i];
+                ar[i] = a;
+            }
+            for(int i=0;i<ar.length;i++)
+                System.out.println(ar[i]+" ");
+            return ar;
+       
+        
   }
     
-    public static void startExperiment(final int imageDelay,int initialDelay,final int blankDelay,final int [] arr,final JLabel l1){
+    public static void startExperiment(final int imageDelay,int initialDelay,final int blankDelay,final String [] arr,final JLabel l1){
     
         Timer timer = new Timer(imageDelay, new ActionListener() {
             BufferedImage img=null;
@@ -117,7 +142,7 @@ public class Util {
                 }
                 else{
                     System.out.println("Displaying blank");
-                    Util.dis(666,l1);
+                    Util.dis("666",l1);
                    
                     counter++;
                     ((Timer)e.getSource()).setDelay(imageDelay);
