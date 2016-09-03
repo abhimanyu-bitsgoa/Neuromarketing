@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.Enumeration;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
@@ -76,10 +77,15 @@ public class Util {
 }
     
     
-    public static String[]  shuffleArray(int range,Component l1)
+    public static String[]  shuffleArray()
   { 
-            String [] ar=new String [range];
+            String [] ar=ImageNames.getImageNames();
+            
+            
+           /*
+            Non functional code to get all the Image file listings
             BufferedReader br = new BufferedReader(new InputStreamReader(Show.class.getResourceAsStream("/accubrain/images/")));
+            
             String fileName;
             int k=0;
         try {
@@ -90,14 +96,8 @@ public class Util {
                 ar[k++]=fileName.substring(0,3);
                 //System.out.println(fileName.substring(0,3));
                 
-            }
-            
-            
-        } catch (IOException ex) {
-            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
-            
+            }*/
+           
            
             Random rnd = ThreadLocalRandom.current();
             for (int i = ar.length - 1; i > 0; i--)

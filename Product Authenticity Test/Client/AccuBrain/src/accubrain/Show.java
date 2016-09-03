@@ -50,7 +50,7 @@ public class Show extends javax.swing.JFrame {
      String arr[];
     
     public Show() {
-        this.arr = Util.shuffleArray(7, this);
+        this.arr = Util.shuffleArray();
         initComponents();
         Util.setScreenDimensions();
         Util.makeFullScreen(l1);
@@ -170,6 +170,7 @@ public class Show extends javax.swing.JFrame {
 	      data=Util.currenImageID+"R";
               System.out.println("Left");
               
+              
 	    }	    
 	    else if(evt.getButton() == MouseEvent.BUTTON3)
 	    {
@@ -180,6 +181,7 @@ public class Show extends javax.swing.JFrame {
         try {
             
             //outToServer = new DataOutputStream(clientSocket.getOutputStream());
+            
             outToServer.writeBytes(data + '\n');
             outToServer.flush();
            
