@@ -40,7 +40,7 @@ public class Show extends javax.swing.JFrame {
     int index=0;
     int imageDelay=1500;
     int blankDelay=3000;
-    
+    static boolean sendClick=false;
     String blankImageID="666";
     String data;
     Socket clientSocket;
@@ -167,7 +167,9 @@ public class Show extends javax.swing.JFrame {
 
     private void l1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_l1MouseClicked
         
-        if(!Util.currenImageID.equals("666")){
+        if(sendClick==true){
+            
+            sendClick=false;
         if(evt.getButton() == MouseEvent.BUTTON1){
 	      data=Util.currenImageID+"R";
               System.out.println("Left");

@@ -130,6 +130,7 @@ public class Util {
                     
                     System.out.println(arr[index]+" Image");
                     Util.dis(arr[index],l1);
+                    Show.sendClick=true;
                     index++;
                     counter++;
                     ((Timer)e.getSource()).setDelay(blankDelay);
@@ -144,7 +145,7 @@ public class Util {
                 else{
                     System.out.println("Displaying blank");
                     Util.dis(blankImageID,l1);
-                   
+                    Show.sendClick=false;
                     counter++;
                     ((Timer)e.getSource()).setDelay(imageDelay);
                 }
