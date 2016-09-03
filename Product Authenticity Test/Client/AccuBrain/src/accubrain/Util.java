@@ -38,6 +38,7 @@ public class Util {
     static int xsize=100;
     static int ysize=100;
     static String currenImageID;
+    static String blankImageID="666";
     
     public static void setScreenDimensions(){
         
@@ -142,7 +143,7 @@ public class Util {
                 }
                 else{
                     System.out.println("Displaying blank");
-                    Util.dis("666",l1);
+                    Util.dis(blankImageID,l1);
                    
                     counter++;
                     ((Timer)e.getSource()).setDelay(imageDelay);

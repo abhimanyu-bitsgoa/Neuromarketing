@@ -41,6 +41,7 @@ public class Show extends javax.swing.JFrame {
     int imageDelay=1500;
     int blankDelay=3000;
     
+    String blankImageID="666";
     String data;
     Socket clientSocket;
     DataOutputStream outToServer;
@@ -54,7 +55,7 @@ public class Show extends javax.swing.JFrame {
         initComponents();
         Util.setScreenDimensions();
         Util.makeFullScreen(l1);
-        Util.dis("666",l1);
+        Util.dis(blankImageID,l1);
         
         
     }
@@ -165,15 +166,15 @@ public class Show extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void l1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_l1MouseClicked
-        if(evt.getButton() == MouseEvent.BUTTON1)
-	    {
+        
+        if(!Util.currenImageID.equals("666")){
+        if(evt.getButton() == MouseEvent.BUTTON1){
 	      data=Util.currenImageID+"R";
               System.out.println("Left");
               
               
 	    }	    
-	    else if(evt.getButton() == MouseEvent.BUTTON3)
-	    {
+	    else if(evt.getButton() == MouseEvent.BUTTON3){
 	      data=Util.currenImageID+"F";
               System.out.println("Right");
 	    }
@@ -189,7 +190,7 @@ public class Show extends javax.swing.JFrame {
             Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
+        }
         
     }//GEN-LAST:event_l1MouseClicked
 
