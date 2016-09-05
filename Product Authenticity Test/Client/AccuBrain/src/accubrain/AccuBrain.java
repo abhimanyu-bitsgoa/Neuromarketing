@@ -6,6 +6,8 @@
 package accubrain;
 
 
+import static accubrain.Util.xsize;
+import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -13,6 +15,7 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
@@ -24,14 +27,30 @@ public class AccuBrain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-         java.awt.EventQueue.invokeLater(new Runnable() {
+        /* java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
               
                 new Show().setVisible(true);
                 
                
             }
-        });
+        });*/
+        JFrame frame=new JFrame();
+         Toolkit tk=Toolkit.getDefaultToolkit();
+        int  xsize=(int)tk.getScreenSize().getWidth();
+        int ysize = (int)tk.getScreenSize().getHeight();
+        
+        
+        
+        frame.setUndecorated(true);
+         frame.setAlwaysOnTop(true);
+        frame.setResizable(false);
+        frame.setVisible(true);
+        frame.setSize(xsize,ysize);
+        
+        
+        frame.setVisible(true);
+        
     }
     
 }

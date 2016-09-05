@@ -50,12 +50,14 @@ public class Util {
     
     public static void makeFullScreen(Object obj){
         JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor((Component) obj);
+       
         topFrame.setAlwaysOnTop(true);
         topFrame.setResizable(false);
         topFrame.setVisible(true);
         topFrame.setSize(xsize,ysize);
         
     }
+  
     
     public static void makeComponentFullScreen(Component comp){
         comp.setSize(xsize, ysize);
