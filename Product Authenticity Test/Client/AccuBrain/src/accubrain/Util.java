@@ -14,10 +14,14 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -40,6 +44,7 @@ public class Util {
     static int ysize=100;
     static String currenImageID;
     static String blankImageID="666";
+    static long startTime=0;
     
     public static void setScreenDimensions(){
         
@@ -56,7 +61,7 @@ public class Util {
         topFrame.pack();
         topFrame.setLocationByPlatform(true);
         topFrame.setAlwaysOnTop(true);
-        topFrame.setResizable(false);
+        topFrame.setResizable(true);
         topFrame.setVisible(true);
         topFrame.setSize(xsize,ysize);
         
@@ -75,6 +80,7 @@ public class Util {
         try {
             currenImageID=imageID;
             BufferedImage img = null;
+            startTime=System.currentTimeMillis();
             img = ImageIO.read(l1.getClass().getResourceAsStream("/accubrain/images/"+imageID+".jpg"));
             Image dimg = img.getScaledInstance(500, 500,Image.SCALE_SMOOTH);
             ImageIcon imageIcon = new ImageIcon(dimg);
@@ -89,22 +95,6 @@ public class Util {
   { 
             String [] ar=ImageNames.getImageNames();
             
-            
-           /*
-            Non functional code to get all the Image file listings
-            BufferedReader br = new BufferedReader(new InputStreamReader(Show.class.getResourceAsStream("/accubrain/images/")));
-            
-            String fileName;
-            int k=0;
-        try {
-            while((fileName = br.readLine()) != null){
-                if(fileName.substring(0,3).equals("666")){
-                    continue;
-                }
-                ar[k++]=fileName.substring(0,3);
-                //System.out.println(fileName.substring(0,3));
-                
-            }*/
            
            
             Random rnd = ThreadLocalRandom.current();
@@ -136,6 +126,7 @@ public class Util {
                 if(index<arr.length){
                     
                     System.out.println(arr[index]+" Image");
+                    
                     Util.dis(arr[index],l1);
                     Show.sendClick=true;
                     index++;
@@ -145,7 +136,7 @@ public class Util {
                     
                 }
                 else{
-                    
+                    printReactionTimes();
                     ((Timer)e.getSource()).stop();
                 }
                 }
@@ -163,6 +154,29 @@ public class Util {
         timer.setInitialDelay(1000);
         timer.start();
         
+    }
+    
+    public static void printReactionTimes(){
+        PrintWriter writer=null;
+        try {
+            ArrayList<String> printList=Show.reactionList;
+            writer = new PrintWriter(Show.filePath, "UTF-8");
+            
+            for(String time:printList ){
+                
+                
+                System.out.println(time);
+                writer.println(time);
+            
+            }
+            writer.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            writer.close();
+        }
     }
     
     

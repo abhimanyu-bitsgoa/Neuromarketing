@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import static java.lang.Thread.sleep;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
@@ -50,8 +51,11 @@ public class Show extends javax.swing.JFrame {
     DataOutputStream outToServer;
     String IPAddress="192.168.100.3";
     int portNumber=6789;
-    
-     String arr[];
+    static long endTime=0;
+    static long reactionTime=0;
+    String arr[];
+    static ArrayList<String> reactionList=new ArrayList();
+    static String filePath="";
     
     public Show() {
         this.arr = Util.shuffleArray();
@@ -59,7 +63,7 @@ public class Show extends javax.swing.JFrame {
         Util.setScreenDimensions();
         Util.makeFullScreen(l1);
         Util.dis(blankImageID,l1);
-        
+        filePath=tPath.getText();
         
     }
 
@@ -80,6 +84,7 @@ public class Show extends javax.swing.JFrame {
         tport = new javax.swing.JTextField();
         l2 = new javax.swing.JLabel();
         l3 = new javax.swing.JLabel();
+        tPath = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -128,6 +133,13 @@ public class Show extends javax.swing.JFrame {
 
         l3.setText("Port");
 
+        tPath.setText("/home/aronzx/Desktop/res.txt");
+        tPath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tPathActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -147,17 +159,21 @@ public class Show extends javax.swing.JFrame {
                 .addGap(46, 46, 46))
             .addGroup(layout.createSequentialGroup()
                 .addGap(161, 161, 161)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(start, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                    .addComponent(connectionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(DisconnectButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(start, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                        .addComponent(connectionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(DisconnectButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(tPath, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(l1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74)
+                .addGap(37, 37, 37)
+                .addComponent(tPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(connectionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(start, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -176,14 +192,23 @@ public class Show extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void l1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_l1MouseClicked
+        
+        
+       
+        
         //Code to make the frame exit
         if(evt.getButton() == MouseEvent.BUTTON2){
             closeConnection();
             System.exit(0);
         }
-            
+          
         
         if(sendClick==true){
+            
+             //Code to get the reaction time
+        endTime=System.currentTimeMillis();
+        reactionTime=(endTime-Util.startTime);
+        reactionList.add(Util.currenImageID+" - "+reactionTime);
             
             sendClick=false;
         if(evt.getButton() == MouseEvent.BUTTON1){
@@ -257,6 +282,10 @@ public class Show extends javax.swing.JFrame {
         }
            
     }//GEN-LAST:event_formMouseClicked
+
+    private void tPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tPathActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tPathActionPerformed
 
     /**
      * @param args the command line arguments
@@ -336,6 +365,7 @@ public class Show extends javax.swing.JFrame {
     private javax.swing.JLabel l2;
     private javax.swing.JLabel l3;
     private javax.swing.JButton start;
+    private javax.swing.JTextField tPath;
     private javax.swing.JTextField tip;
     private javax.swing.JTextField tport;
     // End of variables declaration//GEN-END:variables
