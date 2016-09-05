@@ -272,17 +272,7 @@ public class Show extends javax.swing.JFrame {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-              //Util.getFrame().setUndecorated(true);
-              GraphicsDevice myDevice = null;
-Window myWindow = null;
-
-try {
-    myDevice.setFullScreenWindow(myWindow);
-    
-} finally {
-    
-}
-              
+        
               
                 new Show().setVisible(true);
                 

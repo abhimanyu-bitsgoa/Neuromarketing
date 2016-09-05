@@ -7,6 +7,7 @@ package accubrain;
 
 
 import static accubrain.Util.xsize;
+import java.awt.Container;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -27,29 +28,15 @@ public class AccuBrain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        /* java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-              
-                new Show().setVisible(true);
+                
+                new Show();
                 
                
             }
-        });*/
-        JFrame frame=new JFrame();
-         Toolkit tk=Toolkit.getDefaultToolkit();
-        int  xsize=(int)tk.getScreenSize().getWidth();
-        int ysize = (int)tk.getScreenSize().getHeight();
-        
-        
-        
-        frame.setUndecorated(true);
-         frame.setAlwaysOnTop(true);
-        frame.setResizable(false);
-        frame.setVisible(true);
-        frame.setSize(xsize,ysize);
-        
-        
-        frame.setVisible(true);
+        });
+       
         
     }
     

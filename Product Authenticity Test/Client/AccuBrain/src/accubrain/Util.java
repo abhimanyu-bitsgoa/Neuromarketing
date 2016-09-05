@@ -50,7 +50,10 @@ public class Util {
     
     public static void makeFullScreen(Object obj){
         JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor((Component) obj);
-       
+        topFrame.dispose();
+        topFrame.setUndecorated(true);
+        topFrame.pack();
+        topFrame.setLocationByPlatform(true);
         topFrame.setAlwaysOnTop(true);
         topFrame.setResizable(false);
         topFrame.setVisible(true);
