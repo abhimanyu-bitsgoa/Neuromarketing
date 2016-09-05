@@ -82,10 +82,17 @@ public class Show extends javax.swing.JFrame {
         l3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
+        l1.setBackground(new java.awt.Color(1, 1, 1));
         l1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         l1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/accubrain/images/666.jpg"))); // NOI18N
         l1.setBorder(null);
+        l1.setOpaque(true);
         l1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 l1MouseClicked(evt);
@@ -169,6 +176,12 @@ public class Show extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void l1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_l1MouseClicked
+        //Code to make the frame exit
+        if(evt.getButton() == MouseEvent.BUTTON2){
+            closeConnection();
+            System.exit(0);
+        }
+            
         
         if(sendClick==true){
             
@@ -234,14 +247,16 @@ public class Show extends javax.swing.JFrame {
     }//GEN-LAST:event_connectionButtonActionPerformed
 
     private void DisconnectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisconnectButtonActionPerformed
-        try {
-            outToServer.writeBytes("#" + '\n');
-            outToServer.flush();
-            clientSocket.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        closeConnection();
     }//GEN-LAST:event_DisconnectButtonActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        if(evt.getButton() == MouseEvent.BUTTON2){
+            
+            System.exit(0);
+        }
+           
+    }//GEN-LAST:event_formMouseClicked
 
     /**
      * @param args the command line arguments
@@ -298,6 +313,16 @@ public class Show extends javax.swing.JFrame {
         }
     }
     
+    public void closeConnection(){
+        try {
+            outToServer.writeBytes("#" + '\n');
+            outToServer.flush();
+            clientSocket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    }
     
     
 

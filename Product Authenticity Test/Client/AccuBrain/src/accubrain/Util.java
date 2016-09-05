@@ -5,6 +5,7 @@
  */
 package accubrain;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -65,6 +66,7 @@ public class Util {
     public static void makeComponentFullScreen(Component comp){
         comp.setSize(xsize, ysize);
         
+        
     }
     
     
@@ -74,7 +76,7 @@ public class Util {
             currenImageID=imageID;
             BufferedImage img = null;
             img = ImageIO.read(l1.getClass().getResourceAsStream("/accubrain/images/"+imageID+".jpg"));
-            Image dimg = img.getScaledInstance(xsize, ysize,Image.SCALE_SMOOTH);
+            Image dimg = img.getScaledInstance(500, 500,Image.SCALE_SMOOTH);
             ImageIcon imageIcon = new ImageIcon(dimg);
             l1.setIcon(imageIcon);
         } catch (IOException ex) {
