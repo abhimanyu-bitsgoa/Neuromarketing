@@ -58,10 +58,10 @@ public class Util {
         JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor((Component) obj);
         topFrame.dispose();
         topFrame.setUndecorated(true);
-        topFrame.pack();
-        topFrame.setLocationByPlatform(true);
+        //topFrame.pack();
+        //topFrame.setLocationByPlatform(true);
         topFrame.setAlwaysOnTop(true);
-        topFrame.setResizable(true);
+        topFrame.setResizable(false);
         topFrame.setVisible(true);
         topFrame.setSize(xsize,ysize);
         
@@ -151,7 +151,7 @@ public class Util {
             }
             
         });
-        timer.setInitialDelay(1000);
+        timer.setInitialDelay(initialDelay);
         timer.start();
         
     }

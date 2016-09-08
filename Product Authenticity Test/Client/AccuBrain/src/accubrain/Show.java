@@ -44,6 +44,7 @@ public class Show extends javax.swing.JFrame {
     int index=0;
     int imageDelay=1500;
     int blankDelay=3000;
+    int initialDelay=1000;
     static boolean sendClick=false;
     String blankImageID="666";
     String data;
@@ -230,7 +231,7 @@ public class Show extends javax.swing.JFrame {
             outToServer.flush();
            
         } catch (IOException ex) {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Show.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         }
@@ -241,7 +242,7 @@ public class Show extends javax.swing.JFrame {
          //Why works here?
          //b1.setVisible(false);
          Util.makeComponentFullScreen(l1);
-         Util.startExperiment(imageDelay, imageDelay, blankDelay, arr, l1);
+         Util.startExperiment(imageDelay, initialDelay, blankDelay, arr, l1);
          this.remove(start);   //Why set visible doesnt work
          this.remove(connectionButton);
          this.remove(DisconnectButton);
@@ -348,7 +349,7 @@ public class Show extends javax.swing.JFrame {
             outToServer.flush();
             clientSocket.close();
         } catch (IOException ex) {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Show.class.getName()).log(Level.SEVERE, null, ex);
         }
     
     }
