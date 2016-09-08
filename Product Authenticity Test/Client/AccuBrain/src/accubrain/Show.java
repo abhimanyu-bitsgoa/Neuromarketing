@@ -55,8 +55,10 @@ public class Show extends javax.swing.JFrame {
     static long endTime=0;
     static long reactionTime=0;
     String arr[];
-    static ArrayList<String> reactionList=new ArrayList();
+    static ArrayList<String> reactionList=new ArrayList<String>();
+    static ArrayList<String> scoreList=new ArrayList<String>();
     static String filePath="";
+    static String userName;
     
     public Show() {
         this.arr = Util.shuffleArray();
@@ -64,7 +66,7 @@ public class Show extends javax.swing.JFrame {
         Util.setScreenDimensions();
         Util.makeFullScreen(l1);
         Util.dis(blankImageID,l1);
-        filePath=tpath.getText();
+       
         
     }
 
@@ -78,14 +80,17 @@ public class Show extends javax.swing.JFrame {
     private void initComponents() {
 
         l1 = new javax.swing.JLabel();
-        start = new javax.swing.JButton();
+        startButton = new javax.swing.JButton();
         connectionButton = new javax.swing.JButton();
-        DisconnectButton = new javax.swing.JButton();
-        tip = new javax.swing.JTextField();
-        tport = new javax.swing.JTextField();
-        l2 = new javax.swing.JLabel();
-        l3 = new javax.swing.JLabel();
-        tpath = new javax.swing.JTextField();
+        disconnectButton = new javax.swing.JButton();
+        tIP = new javax.swing.JTextField();
+        tPort = new javax.swing.JTextField();
+        lIP = new javax.swing.JLabel();
+        lPort = new javax.swing.JLabel();
+        tPath = new javax.swing.JTextField();
+        lName = new javax.swing.JLabel();
+        tName = new javax.swing.JTextField();
+        lPath = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -105,10 +110,10 @@ public class Show extends javax.swing.JFrame {
             }
         });
 
-        start.setText("Start Experiment");
-        start.addActionListener(new java.awt.event.ActionListener() {
+        startButton.setText("Start Experiment");
+        startButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startActionPerformed(evt);
+                startButtonActionPerformed(evt);
             }
         });
 
@@ -119,77 +124,96 @@ public class Show extends javax.swing.JFrame {
             }
         });
 
-        DisconnectButton.setText("Disconnect");
-        DisconnectButton.addActionListener(new java.awt.event.ActionListener() {
+        disconnectButton.setText("Disconnect");
+        disconnectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DisconnectButtonActionPerformed(evt);
+                disconnectButtonActionPerformed(evt);
             }
         });
 
-        tip.setText("10.20.19.64");
+        tIP.setText("10.20.19.64");
 
-        tport.setText("6789");
+        tPort.setText("6789");
 
-        l2.setText("IP");
+        lIP.setText("IP");
 
-        l3.setText("Port");
+        lPort.setText("Port");
 
-        tpath.setText("/home/aronzx/Desktop/Abhi");
-        tpath.addActionListener(new java.awt.event.ActionListener() {
+        tPath.setText("/home/aronzx/Desktop/Abhi");
+        tPath.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tpathActionPerformed(evt);
+                tPathActionPerformed(evt);
             }
         });
+
+        lName.setText("Enter Name");
+
+        lPath.setText("File Path");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(disconnectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(connectionButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lPort)
+                                    .addComponent(lIP, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(100, 100, 100)
+                                .addComponent(lPath)))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tPath, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tIP, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tPort, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(67, 67, 67)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lName)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(134, 134, 134))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(l1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(l2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tip, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
-                .addComponent(l3)
-                .addGap(18, 18, 18)
-                .addComponent(tport, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(start, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                            .addComponent(connectionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(DisconnectButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(tpath, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(l1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(tpath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(connectionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(start, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(DisconnectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(100, 100, 100)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tip, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tport, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(l2)
-                    .addComponent(l3))
-                .addContainerGap(84, Short.MAX_VALUE))
+                    .addComponent(lPath)
+                    .addComponent(tPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tIP, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(lIP, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tName, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lPort, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tPort, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(75, 75, 75)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(connectionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(disconnectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(startButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(158, 158, 158))
         );
 
         pack();
@@ -212,18 +236,18 @@ public class Show extends javax.swing.JFrame {
              //Code to get the reaction time
         endTime=System.currentTimeMillis();
         reactionTime=(endTime-Util.startTime);
-        reactionList.add(Util.currenImageID+" , "+reactionTime);
+        //reactionList.add(Util.currenImageID+" , "+reactionTime);
             
             sendClick=false;
         if(evt.getButton() == MouseEvent.BUTTON1){
 	      data=Util.currenImageID+"R";
-              System.out.println("Left");
+              //System.out.println("Left");
               
               
 	    }	    
 	    else if(evt.getButton() == MouseEvent.BUTTON3){
 	      data=Util.currenImageID+"F";
-              System.out.println("Right");
+              //System.out.println("Right");
 	    }
         
         try {
@@ -232,6 +256,8 @@ public class Show extends javax.swing.JFrame {
             
             outToServer.writeBytes(data + '\n');
             outToServer.flush();
+            reactionList.add(data+" , "+reactionTime);
+            scoreList.add(data);
            
         } catch (IOException ex) {
             Logger.getLogger(Show.class.getName()).log(Level.SEVERE, null, ex);
@@ -241,27 +267,31 @@ public class Show extends javax.swing.JFrame {
         
     }//GEN-LAST:event_l1MouseClicked
 
-    private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
+    private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
          //Why works here?
          //b1.setVisible(false);
          Util.makeComponentFullScreen(l1);
          Util.startExperiment(imageDelay, initialDelay, blankDelay, arr, l1);
-         this.remove(start);   //Why set visible doesnt work
+         this.remove(startButton);   //Why set visible doesnt work
          this.remove(connectionButton);
-         this.remove(DisconnectButton);
-         this.remove(tip);
-         this.remove(tport);
-         this.remove(tpath);
-         this.remove(l2);
-         this.remove(l3);
+         this.remove(disconnectButton);
+         this.remove(tIP);
+         this.remove(tPort);
+         this.remove(tPath);
+         this.remove(tName);
+         this.remove(lIP);
+         this.remove(lPort);
+         this.remove(lName);
+         this.remove(lPath);
          
-    }//GEN-LAST:event_startActionPerformed
+    }//GEN-LAST:event_startButtonActionPerformed
 
     private void connectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectionButtonActionPerformed
-        IPAddress= tip.getText();
+        IPAddress= tIP.getText();
         
-        portNumber= Integer.parseInt(tport.getText());
- 
+        portNumber= Integer.parseInt(tPort.getText());
+         filePath=tPath.getText();
+        userName=tName.getText();
         
         try {
             
@@ -276,9 +306,9 @@ public class Show extends javax.swing.JFrame {
         
     }//GEN-LAST:event_connectionButtonActionPerformed
 
-    private void DisconnectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisconnectButtonActionPerformed
+    private void disconnectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disconnectButtonActionPerformed
         closeConnection();
-    }//GEN-LAST:event_DisconnectButtonActionPerformed
+    }//GEN-LAST:event_disconnectButtonActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         if(evt.getButton() == MouseEvent.BUTTON2){
@@ -288,9 +318,9 @@ public class Show extends javax.swing.JFrame {
            
     }//GEN-LAST:event_formMouseClicked
 
-    private void tpathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpathActionPerformed
+    private void tPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tPathActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tpathActionPerformed
+    }//GEN-LAST:event_tPathActionPerformed
 
     /**
      * @param args the command line arguments
@@ -364,14 +394,17 @@ public class Show extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton DisconnectButton;
     private javax.swing.JButton connectionButton;
+    private javax.swing.JButton disconnectButton;
     private javax.swing.JLabel l1;
-    private javax.swing.JLabel l2;
-    private javax.swing.JLabel l3;
-    private javax.swing.JButton start;
-    private javax.swing.JTextField tip;
-    private javax.swing.JTextField tpath;
-    private javax.swing.JTextField tport;
+    private javax.swing.JLabel lIP;
+    private javax.swing.JLabel lName;
+    private javax.swing.JLabel lPath;
+    private javax.swing.JLabel lPort;
+    private javax.swing.JButton startButton;
+    private javax.swing.JTextField tIP;
+    private javax.swing.JTextField tName;
+    private javax.swing.JTextField tPath;
+    private javax.swing.JTextField tPort;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@
  */
 package accubrain;
 
+import static accubrain.Show.endTime;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Image;
@@ -45,7 +46,9 @@ public class Util {
     static String currenImageID;
     static String blankImageID="666";
     static long startTime=0;
-    
+    static long experimentStartTime=0;
+    static long experimentEndTime=0;
+    static long experimentTotalTime=0;
     public static void setScreenDimensions(){
         
           Toolkit tk=Toolkit.getDefaultToolkit();
@@ -106,15 +109,15 @@ public class Util {
                 ar[index] = ar[i];
                 ar[i] = a;
             }
-            for(int i=0;i<ar.length;i++)
-                System.out.println(ar[i]+" ");
+            /*for(int i=0;i<ar.length;i++)
+                System.out.println(ar[i]+" ");*/
             return ar;
        
         
   }
     
     public static void startExperiment(final int imageDelay,int initialDelay,final int blankDelay,final String [] arr,final JLabel l1){
-    
+        experimentStartTime=System.currentTimeMillis();
         Timer timer = new Timer(imageDelay, new ActionListener() {
             BufferedImage img=null;
             int counter=0;
@@ -125,7 +128,7 @@ public class Util {
                 if(counter%2==0){
                 if(index<arr.length){
                     
-                    System.out.println(arr[index]+" Image");
+                   // System.out.println(arr[index]+" Image");
                     
                     Util.dis(arr[index],l1);
                     Show.sendClick=true;
@@ -136,13 +139,16 @@ public class Util {
                     
                 }
                 else{
+                    experimentEndTime=System.currentTimeMillis();
+                    experimentTotalTime=experimentEndTime-experimentStartTime;
                     printReactionTimes();
                     ((Timer)e.getSource()).stop();
+                    
                     System.exit(0);
                 }
                 }
                 else{
-                    System.out.println("Displaying blank");
+                   // System.out.println("Displaying blank");
                     Util.dis(blankImageID,l1);
                     Show.sendClick=false;
                     counter++;
@@ -161,15 +167,34 @@ public class Util {
         PrintWriter writer=null;
         try {
             ArrayList<String> printList=Show.reactionList;
+            ArrayList<String> printList2=Show.scoreList;
             writer = new PrintWriter(Show.filePath, "UTF-8");
-            
+            writer.println("Name , "+Show.userName);
+ 
+            int k=0;
+            int correct=0;
+            int total=0;
+            String response;
             for(String time:printList ){
-                
-                
-                System.out.println(time);
+                total++;
+                response=printList2.get(k++); 
+                if(response.charAt(3)==response.charAt(2)){
+                    time=time+" , "+" Correct";
+                    correct++;
+                }else{
+                    time=time+" , "+" Incorrent";
+                }
+                    
+                    
+                //System.out.println(time);
                 writer.println(time);
             
             }
+            writer.println("Total , "+total);
+            writer.println("Correct , "+correct);
+            writer.println("Incorrect , "+(total-correct));
+            writer.println("Accuracy , "+((((double)correct)/total)*100));
+            writer.println("Experiment_time , "+experimentTotalTime/1000);
             System.out.println("File created successfully");
             writer.close();
         } catch (FileNotFoundException ex) {
