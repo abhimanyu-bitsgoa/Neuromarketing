@@ -64,7 +64,7 @@ public class Show extends javax.swing.JFrame {
         Util.setScreenDimensions();
         Util.makeFullScreen(l1);
         Util.dis(blankImageID,l1);
-        filePath=tPath.getText();
+        filePath=tpath.getText();
         
     }
 
@@ -85,7 +85,7 @@ public class Show extends javax.swing.JFrame {
         tport = new javax.swing.JTextField();
         l2 = new javax.swing.JLabel();
         l3 = new javax.swing.JLabel();
-        tPath = new javax.swing.JTextField();
+        tpath = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -134,10 +134,10 @@ public class Show extends javax.swing.JFrame {
 
         l3.setText("Port");
 
-        tPath.setText("/home/aronzx/Desktop/Abhimanyu");
-        tPath.addActionListener(new java.awt.event.ActionListener() {
+        tpath.setText("/home/aronzx/Desktop/Abhi");
+        tpath.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tPathActionPerformed(evt);
+                tpathActionPerformed(evt);
             }
         });
 
@@ -168,7 +168,7 @@ public class Show extends javax.swing.JFrame {
                             .addComponent(DisconnectButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(120, 120, 120)
-                        .addComponent(tPath, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tpath, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -176,7 +176,7 @@ public class Show extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(l1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
-                .addComponent(tPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tpath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(connectionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -251,6 +251,7 @@ public class Show extends javax.swing.JFrame {
          this.remove(DisconnectButton);
          this.remove(tip);
          this.remove(tport);
+         this.remove(tpath);
          this.remove(l2);
          this.remove(l3);
          
@@ -287,9 +288,9 @@ public class Show extends javax.swing.JFrame {
            
     }//GEN-LAST:event_formMouseClicked
 
-    private void tPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tPathActionPerformed
+    private void tpathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpathActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tPathActionPerformed
+    }//GEN-LAST:event_tpathActionPerformed
 
     /**
      * @param args the command line arguments
@@ -369,8 +370,8 @@ public class Show extends javax.swing.JFrame {
     private javax.swing.JLabel l2;
     private javax.swing.JLabel l3;
     private javax.swing.JButton start;
-    private javax.swing.JTextField tPath;
     private javax.swing.JTextField tip;
+    private javax.swing.JTextField tpath;
     private javax.swing.JTextField tport;
     // End of variables declaration//GEN-END:variables
 }

@@ -138,6 +138,7 @@ public class Util {
                 else{
                     printReactionTimes();
                     ((Timer)e.getSource()).stop();
+                    System.exit(0);
                 }
                 }
                 else{
