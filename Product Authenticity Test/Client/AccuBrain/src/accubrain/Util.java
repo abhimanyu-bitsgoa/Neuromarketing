@@ -124,7 +124,7 @@ public class Util {
             int index=0;
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(((Timer)e.getSource()).getDelay()+"");
+                //System.out.println(((Timer)e.getSource()).getDelay()+"");
                 if(counter%2==0){
                 if(index<arr.length){
                     
@@ -190,7 +190,8 @@ public class Util {
                 writer.println(time);
             
             }
-            writer.println("Total , "+total);
+            writer.println("Total_Images , "+ImageNames.getImageNames().length);
+            writer.println("Responded , "+total);
             writer.println("Correct , "+correct);
             writer.println("Incorrect , "+(total-correct));
             writer.println("Accuracy , "+((((double)correct)/total)*100));

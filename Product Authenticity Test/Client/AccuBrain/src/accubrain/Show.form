@@ -26,51 +26,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="disconnectButton" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                              <Component id="connectionButton" alignment="1" min="-2" pref="129" max="-2" attributes="0"/>
-                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                  <Component id="lPort" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lIP" min="-2" pref="29" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="lPath" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-              </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="tPath" alignment="0" min="-2" pref="264" max="-2" attributes="0"/>
-                          <Component id="tIP" min="-2" pref="126" max="-2" attributes="0"/>
-                          <Component id="tPort" min="-2" pref="50" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="tName" min="-2" pref="100" max="-2" attributes="0"/>
-                          <Component id="lName" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                      <Component id="startButton" min="-2" pref="195" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
-          </Group>
           <Group type="102" attributes="0">
               <Component id="l1" min="-2" pref="0" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="panel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="panel1" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="315" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -78,33 +44,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="l1" min="-2" pref="0" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lPath" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tPath" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lName" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="tIP" alignment="3" pref="40" max="32767" attributes="0"/>
-                  <Component id="lIP" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                  <Component id="tName" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lPort" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                  <Component id="tPort" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="connectionButton" min="-2" pref="40" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                      <Component id="disconnectButton" min="-2" pref="40" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="startButton" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="panel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+              <Component id="panel2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -128,69 +72,172 @@
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="l1MouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="startButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Start Experiment"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="startButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="connectionButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Connect"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="connectionButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="disconnectButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Disconnect"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="disconnectButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="tIP">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="10.20.19.64"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="tPort">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="6789"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lIP">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="IP"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lPort">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Port"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="tPath">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="/home/aronzx/Desktop/Abhi"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tPathActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lName">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Enter Name"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="tName">
-    </Component>
-    <Component class="javax.swing.JLabel" name="lPath">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="File Path"/>
-      </Properties>
-    </Component>
+    <Container class="javax.swing.JPanel" name="panel1">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lIP" min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="lPath" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="tPath" min="-2" pref="264" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="tIP" min="-2" pref="126" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="lPort" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="tPort" min="-2" pref="50" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
+                  <Component id="lName" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="tName" min="-2" pref="100" max="-2" attributes="0"/>
+                  <EmptySpace pref="34" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lPath" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tPath" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="lName" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tName" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="tIP" alignment="3" pref="40" max="32767" attributes="0"/>
+                              <Component id="lIP" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lPort" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="tPort" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JTextField" name="tPath">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="/home/aronzx/Desktop/"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tPathActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tPort">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="6789"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tIP">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="10.20.19.64"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lPort">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Port"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lIP">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="IP"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lPath">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="File Path"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lName">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Enter Name"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tName">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Abhimanyu"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="panel2">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="disconnectButton" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="connectionButton" min="-2" pref="129" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                  <Component id="startButton" min="-2" pref="195" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="connectionButton" min="-2" pref="40" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="disconnectButton" min="-2" pref="40" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="startButton" min="-2" pref="117" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JButton" name="startButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Start Experiment"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="startButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="disconnectButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Disconnect"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="disconnectButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="connectionButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Connect"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="connectionButtonActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>
