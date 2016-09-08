@@ -126,7 +126,7 @@ public class Show extends javax.swing.JFrame {
             }
         });
 
-        tip.setText("192.168.100.3");
+        tip.setText("10.20.19.64");
 
         tport.setText("6789");
 
@@ -134,7 +134,7 @@ public class Show extends javax.swing.JFrame {
 
         l3.setText("Port");
 
-        tPath.setText("/home/aronzx/Desktop/res.txt");
+        tPath.setText("/home/aronzx/Desktop/Abhimanyu");
         tPath.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tPathActionPerformed(evt);
@@ -159,13 +159,16 @@ public class Show extends javax.swing.JFrame {
                 .addComponent(tport, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46))
             .addGroup(layout.createSequentialGroup()
-                .addGap(161, 161, 161)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(start, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                        .addComponent(connectionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(DisconnectButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(tPath, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(start, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                            .addComponent(connectionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(DisconnectButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addComponent(tPath, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -209,7 +212,7 @@ public class Show extends javax.swing.JFrame {
              //Code to get the reaction time
         endTime=System.currentTimeMillis();
         reactionTime=(endTime-Util.startTime);
-        reactionList.add(Util.currenImageID+" - "+reactionTime);
+        reactionList.add(Util.currenImageID+" , "+reactionTime);
             
             sendClick=false;
         if(evt.getButton() == MouseEvent.BUTTON1){

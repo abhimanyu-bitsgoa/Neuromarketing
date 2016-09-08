@@ -169,6 +169,7 @@ public class Util {
                 writer.println(time);
             
             }
+            System.out.println("File created successfully");
             writer.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
