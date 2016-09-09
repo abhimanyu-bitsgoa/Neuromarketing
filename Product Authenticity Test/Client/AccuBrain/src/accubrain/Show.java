@@ -276,23 +276,25 @@ public class Show extends javax.swing.JFrame {
         if(evt.getButton() == MouseEvent.BUTTON1){
 	      data=Util.currenImageID+"R";
               //System.out.println("Left");
-              
+              Util.currentImageObject.userResponse=1;
               
 	    }	    
 	    else if(evt.getButton() == MouseEvent.BUTTON3){
 	      data=Util.currenImageID+"F";
               //System.out.println("Right");
+              Util.currentImageObject.userResponse=0;
 	    }
         
         try {
             
-            //outToServer = new DataOutputStream(clientSocket.getOutputStream());
+
             
             outToServer.writeBytes(data + '\n');
             outToServer.flush();
-            reactionList.add(data+" , "+reactionTime);
-            scoreList.add(data);
-           
+            Util.currentImageObject.imageCode=data;
+            Util.currentImageObject.imageReactionTime=reactionTime;
+
+            
         } catch (IOException ex) {
             Logger.getLogger(Show.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -390,7 +392,7 @@ public class Show extends javax.swing.JFrame {
         
     }
     
-    //public int getImageCode();
+
     public void displayImage(BufferedImage img, Image dimg,int xsize,int ysize,int imgNum){
         try { 
             img = null;

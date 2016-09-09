@@ -49,6 +49,7 @@ public class Util {
     static long experimentStartTime=0;
     static long experimentEndTime=0;
     static long experimentTotalTime=0;
+    static ImageData currentImageObject;
     public static void setScreenDimensions(){
         
           Toolkit tk=Toolkit.getDefaultToolkit();
@@ -94,12 +95,9 @@ public class Util {
 }
     
     
-    public static String[]  shuffleArray()
-  { 
-            String [] ar=ImageNames.getImageNames();
+    public static String[]  shuffleArray(){ 
+            String [] ar=ImageData.getImageNames();
             
-           
-           
             Random rnd = ThreadLocalRandom.current();
             for (int i = ar.length - 1; i > 0; i--)
             {
@@ -109,8 +107,10 @@ public class Util {
                 ar[index] = ar[i];
                 ar[i] = a;
             }
-            /*for(int i=0;i<ar.length;i++)
-                System.out.println(ar[i]+" ");*/
+            
+            //Intiliase the ImageData ArrayList
+            ImageData.initialiseImageData();
+            
             return ar;
        
         
@@ -128,8 +128,7 @@ public class Util {
                 if(counter%2==0){
                 if(index<arr.length){
                     
-                   // System.out.println(arr[index]+" Image");
-                    
+                    currentImageObject=ImageData.getCurrentImageObject();
                     Util.dis(arr[index],l1);
                     Show.sendClick=true;
                     index++;
@@ -166,31 +165,44 @@ public class Util {
     public static void printReactionTimes(){
         PrintWriter writer=null;
         try {
-            ArrayList<String> printList=Show.reactionList;
-            ArrayList<String> printList2=Show.scoreList;
+            
+            ArrayList<ImageData> printImageList=ImageData.getImageData();
+            
             writer = new PrintWriter(Show.filePath, "UTF-8");
             writer.println("Name , "+Show.userName);
  
-            int k=0;
+           
             int correct=0;
             int total=0;
             String response;
-            for(String time:printList ){
-                total++;
-                response=printList2.get(k++); 
-                if(response.charAt(3)==response.charAt(2)){
-                    time=time+" , "+" Correct";
-                    correct++;
-                }else{
-                    time=time+" , "+" Incorrent";
-                }
-                    
-                    
-                //System.out.println(time);
-                writer.println(time);
             
+            
+            
+            for(ImageData currentImage:printImageList){
+                
+                String resultTuple="";
+                int imageNumber=currentImage.getImageNumber();
+                String currentImageCode=currentImage.imageCode;
+                long imageReactionTime=currentImage.imageReactionTime;
+                int userResponse=currentImage.userResponse;
+                resultTuple+=+imageNumber+","+currentImageCode+","+imageReactionTime;
+                
+                if(userResponse==-1){
+                    resultTuple+=","+"Missed";
+                }
+                else if(userResponse==1){
+                    resultTuple+=","+"Correct";
+                    correct++;
+                    total++;
+                }
+                else{
+                    resultTuple+=","+"Incorrect";
+                    total++;
+                }
+                writer.println(resultTuple);
             }
-            writer.println("Total_Images , "+ImageNames.getImageNames().length);
+            writer.println("");
+            writer.println("Total_Images , "+ImageData.getImageNames().length);
             writer.println("Responded , "+total);
             writer.println("Correct , "+correct);
             writer.println("Incorrect , "+(total-correct));
