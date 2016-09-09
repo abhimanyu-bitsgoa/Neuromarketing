@@ -42,8 +42,8 @@ public class Show extends javax.swing.JFrame {
      * Creates new form Show
      */
     int index=0;
-    int imageDelay=1500;
-    int blankDelay=3000;
+    int imageDelay=2000;
+    int blankDelay=5000;
     int initialDelay=1000;
     static boolean sendClick=false;
     String blankImageID="666";
