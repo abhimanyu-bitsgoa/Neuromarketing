@@ -45,11 +45,16 @@ public class Util {
     static int ysize=100;
     static String currenImageID;
     static String blankImageID="666";
+    static String pauseImageID="777";
     static long startTime=0;
     static long experimentStartTime=0;
     static long experimentEndTime=0;
     static long experimentTotalTime=0;
     static ImageData currentImageObject;
+    private static int imageBreakpoint1=31;
+    private static int imageBreakpoint2=62;
+    
+    
     public static void setScreenDimensions(){
         
           Toolkit tk=Toolkit.getDefaultToolkit();
@@ -60,6 +65,7 @@ public class Util {
     
     public static void makeFullScreen(Object obj){
         JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor((Component) obj);
+
         topFrame.dispose();
         topFrame.setUndecorated(true);
         //topFrame.pack();
@@ -116,15 +122,18 @@ public class Util {
         
   }
     
-    public static void startExperiment(final int imageDelay,int initialDelay,final int blankDelay,final String [] arr,final JLabel l1){
+    public static void startExperiment(final int imageDelay,int initialDelay,final int blankDelay,final int pauseImageDelay,final String [] arr,final JLabel l1){
         experimentStartTime=System.currentTimeMillis();
         Timer timer = new Timer(imageDelay, new ActionListener() {
             BufferedImage img=null;
             int counter=0;
             int index=0;
+            boolean pauseInterval=false;
+            int pauseCount=0;
             @Override
             public void actionPerformed(ActionEvent e) {
                 //System.out.println(((Timer)e.getSource()).getDelay()+"");
+                if(pauseInterval==false){
                 if(counter%2==0){
                 if(index<arr.length){
                     
@@ -133,7 +142,16 @@ public class Util {
                     Show.sendClick=true;
                     index++;
                     counter++;
+                    //System.out.println(counter);
+                    
+                    if(counter==31||counter==63){
+                        
+                        pauseInterval=true;
+                        
+                    }
+                    
                     ((Timer)e.getSource()).setDelay(blankDelay);
+                    
                     
                     
                 }
@@ -148,10 +166,29 @@ public class Util {
                 }
                 else{
                    // System.out.println("Displaying blank");
+                   //
+                    
                     Util.dis(blankImageID,l1);
                     Show.sendClick=false;
                     counter++;
                     ((Timer)e.getSource()).setDelay(imageDelay);
+                }
+            }else{
+                    
+                    doPause(l1);
+                    pauseCount++;
+                    
+                    if(pauseCount==pauseImageDelay){
+                        
+                        pauseInterval=false;
+                        l1.setBackground(Color.black);
+                        Util.dis(blankImageID,l1);
+                        Show.sendClick=false;
+                        counter++;
+                        pauseCount=0;
+                        ((Timer)e.getSource()).setDelay(imageDelay);
+                        
+                    }
                 }
 
             }
@@ -159,6 +196,7 @@ public class Util {
         });
         timer.setInitialDelay(initialDelay);
         timer.start();
+        
         
     }
     
@@ -219,5 +257,15 @@ public class Util {
         }
     }
     
+    public static void doPause(JLabel l1){
+    
+                        
+                        l1.setBackground(Color.white);
+                        Util.dis(pauseImageID,l1);
+                        
+                        //l1.setBackground(Color.black);
+                    
+    
+    }
     
 }

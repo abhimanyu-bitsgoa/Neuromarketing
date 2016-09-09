@@ -45,6 +45,7 @@ public class Show extends javax.swing.JFrame {
     int imageDelay=2000;
     int blankDelay=5000;
     int initialDelay=1000;
+    int pauseImageDelay=30;
     static boolean sendClick=false;
     String blankImageID="666";
     String data;
@@ -121,7 +122,7 @@ public class Show extends javax.swing.JFrame {
 
         tPort.setText("6789");
 
-        tIP.setText("10.20.19.64");
+        tIP.setText("192.168.100.3");
 
         lPort.setText("Port");
 
@@ -307,7 +308,7 @@ public class Show extends javax.swing.JFrame {
          //Why works here?
          //b1.setVisible(false);
          Util.makeComponentFullScreen(l1);
-         Util.startExperiment(imageDelay, initialDelay, blankDelay, arr, l1);
+         Util.startExperiment(imageDelay, initialDelay, blankDelay,pauseImageDelay/5, arr, l1);
          emptyFrame();
          
          
