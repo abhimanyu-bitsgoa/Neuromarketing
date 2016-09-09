@@ -44,8 +44,8 @@ public class Util {
     static int xsize=100;
     static int ysize=100;
     static String currenImageID;
-    static String blankImageID="666";
-    static String pauseImageID="777";
+    static String blankImageID="555";
+    static String pauseImageID="888";
     static long startTime=0;
     static long experimentStartTime=0;
     static long experimentEndTime=0;

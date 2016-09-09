@@ -44,10 +44,10 @@ public class Show extends javax.swing.JFrame {
     int index=0;
     int imageDelay=2000;
     int blankDelay=5000;
-    int initialDelay=1000;
+    int initialDelay=5000;
     int pauseImageDelay=30;
     static boolean sendClick=false;
-    String blankImageID="666";
+    String blankImageID="555";
     String data;
     Socket clientSocket;
     DataOutputStream outToServer;
