@@ -64,6 +64,7 @@ public class Show extends javax.swing.JFrame {
     public Show() {
         this.arr = Util.shuffleArray();
         initComponents();
+        startButton.setVisible(false);
         Util.setScreenDimensions();
         Util.makeFullScreen(l1);
         Util.dis(blankImageID,l1);
@@ -327,6 +328,7 @@ public class Show extends javax.swing.JFrame {
             clientSocket = new Socket(IPAddress, portNumber);
             outToServer = new DataOutputStream(clientSocket.getOutputStream());
             
+            startButton.setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(AccuBrain.class.getName()).log(Level.SEVERE, null, ex);
         }
