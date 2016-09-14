@@ -291,7 +291,7 @@ public class Show extends javax.swing.JFrame {
             
 
             
-            outToServer.writeBytes(data + '\n');
+            outToServer.writeBytes(data);
             outToServer.flush();
             Util.currentImageObject.imageCode=data;
             Util.currentImageObject.imageReactionTime=reactionTime;
