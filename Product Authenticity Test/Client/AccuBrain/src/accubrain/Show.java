@@ -48,7 +48,7 @@ public class Show extends javax.swing.JFrame {
     int pauseImageDelay=30;
     static boolean sendClick=false;
     String blankImageID="555";
-    String data;
+    byte[] data;
     Socket clientSocket;
     DataOutputStream outToServer;
     String IPAddress="192.168.100.3";
@@ -276,13 +276,13 @@ public class Show extends javax.swing.JFrame {
             
             sendClick=false;
         if(evt.getButton() == MouseEvent.BUTTON1){
-	      data=Util.currenImageID+"R";
+	      data=(Util.currenImageID+"R").getBytes();
               //System.out.println("Left");
               Util.currentImageObject.userResponse=1;
               
 	    }	    
 	    else if(evt.getButton() == MouseEvent.BUTTON3){
-	      data=Util.currenImageID+"F";
+	      data=(Util.currenImageID+"F").getBytes();
               //System.out.println("Right");
               Util.currentImageObject.userResponse=0;
 	    }
@@ -291,9 +291,9 @@ public class Show extends javax.swing.JFrame {
             
 
             
-            outToServer.writeBytes(data);
+            outToServer.write(data);
             outToServer.flush();
-            Util.currentImageObject.imageCode=data;
+            Util.currentImageObject.imageCode=Util.currenImageID;
             Util.currentImageObject.imageReactionTime=reactionTime;
 
             
