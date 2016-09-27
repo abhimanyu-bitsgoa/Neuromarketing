@@ -51,8 +51,9 @@ public class Show extends javax.swing.JFrame {
     byte[] data;
     Socket clientSocket;
     DataOutputStream outToServer;
-    String IPAddress="192.168.100.3";
-    int portNumber=6789;
+    String IPAddress="10.10.10.45";
+    int portNumber=6666;
+    String codeString="";
     static long endTime=0;
     static long reactionTime=0;
     String arr[];
@@ -121,9 +122,9 @@ public class Show extends javax.swing.JFrame {
             }
         });
 
-        tPort.setText("6789");
+        tPort.setText("6666");
 
-        tIP.setText("192.168.100.3");
+        tIP.setText("10.10.10.45");
 
         lPort.setText("Port");
 
@@ -277,13 +278,15 @@ public class Show extends javax.swing.JFrame {
             sendClick=false;
         if(evt.getButton() == MouseEvent.BUTTON1){
 	      data=(Util.currenImageID+"R").getBytes();
+              codeString=Util.currenImageID+"R";
               //System.out.println("Left");
               Util.currentImageObject.userResponse=1;
               
 	    }	    
 	    else if(evt.getButton() == MouseEvent.BUTTON3){
 	      data=(Util.currenImageID+"F").getBytes();
-              //System.out.println("Right");
+              codeString=Util.currenImageID+"F";
+               //System.out.println("Right");
               Util.currentImageObject.userResponse=0;
 	    }
         
@@ -293,7 +296,7 @@ public class Show extends javax.swing.JFrame {
             
             outToServer.write(data);
             outToServer.flush();
-            Util.currentImageObject.imageCode=Util.currenImageID;
+            Util.currentImageObject.imageCode=codeString;
             Util.currentImageObject.imageReactionTime=reactionTime;
 
             
@@ -320,7 +323,7 @@ public class Show extends javax.swing.JFrame {
         
         portNumber= Integer.parseInt(tPort.getText());
         userName=tName.getText();
-        filePath=tPath.getText()+userName+".xls";
+        filePath=tPath.getText()+userName+".csv";
         
         
         try {
