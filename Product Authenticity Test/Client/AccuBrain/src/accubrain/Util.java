@@ -53,6 +53,9 @@ public class Util {
     static ImageData currentImageObject;
     private static int imageBreakpoint1=31;
     private static int imageBreakpoint2=62;
+    static String fixature_ID="FIXS";
+    static String pause_ID="PAUS";
+    
     
     
     public static void setScreenDimensions(){
@@ -165,8 +168,8 @@ public class Util {
                 }
                 }
                 else{
-                   // System.out.println("Displaying blank");
-                   //
+                    //Insert Blank event here
+                    sendEvent(fixature_ID);
                     
                     Util.dis(blankImageID,l1);
                     Show.sendClick=false;
@@ -175,6 +178,9 @@ public class Util {
                 }
             }else{
                     
+                    
+                    //Insert Pause event here
+                    sendEvent(pause_ID);
                     doPause(l1);
                     pauseCount++;
                     
@@ -182,6 +188,9 @@ public class Util {
                         
                         pauseInterval=false;
                         l1.setBackground(Color.black);
+                       //Insert Blank event here
+                        sendEvent(fixature_ID);
+                        
                         Util.dis(blankImageID,l1);
                         Show.sendClick=false;
                         counter++;
@@ -266,6 +275,16 @@ public class Util {
                         //l1.setBackground(Color.black);
                     
     
+    }
+    
+    public static void sendEvent(String name){
+    
+        try {
+                        //Insert blank event
+                        Show.outToServer.write(name.getBytes());
+                    } catch (IOException ex) {
+                        Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+                    }
     }
     
 }

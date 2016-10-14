@@ -49,8 +49,8 @@ public class Show extends javax.swing.JFrame {
     static boolean sendClick=false;
     String blankImageID="555";
     byte[] data;
-    Socket clientSocket;
-    DataOutputStream outToServer;
+    static Socket clientSocket;
+    static DataOutputStream outToServer;
     String IPAddress="10.10.10.45";
     int portNumber=6666;
     String codeString="";
@@ -68,6 +68,7 @@ public class Show extends javax.swing.JFrame {
         startButton.setVisible(false);
         Util.setScreenDimensions();
         Util.makeFullScreen(l1);
+        Util.sendEvent(Util.fixature_ID);
         Util.dis(blankImageID,l1);
        
         
@@ -263,8 +264,8 @@ public class Show extends javax.swing.JFrame {
         
         //Code to make the frame exit
         if(evt.getButton() == MouseEvent.BUTTON2){
-            closeConnection();
-            System.exit(0);
+            //closeConnection();
+            //6789System.exit(0);
         }
           
         
