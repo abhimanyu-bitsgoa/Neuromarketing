@@ -47,7 +47,7 @@ public class Show extends javax.swing.JFrame {
     int initialDelay=5000;
     int pauseImageDelay=30;
     static boolean sendClick=false;
-    String blankImageID="555";
+    static String blankImageID="555";
     byte[] data;
     static Socket clientSocket;
     static DataOutputStream outToServer;
@@ -68,7 +68,7 @@ public class Show extends javax.swing.JFrame {
         startButton.setVisible(false);
         Util.setScreenDimensions();
         Util.makeFullScreen(l1);
-        Util.sendEvent(Util.fixature_ID);
+        
         Util.dis(blankImageID,l1);
        
         
@@ -310,11 +310,11 @@ public class Show extends javax.swing.JFrame {
     }//GEN-LAST:event_l1MouseClicked
 
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
-         //Why works here?
-         //b1.setVisible(false);
+         Util.sendEvent("FIXS");
          Util.makeComponentFullScreen(l1);
          Util.startExperiment(imageDelay, initialDelay, blankDelay,pauseImageDelay/5, arr, l1);
          emptyFrame();
+         
          
          
     }//GEN-LAST:event_startButtonActionPerformed
@@ -331,7 +331,7 @@ public class Show extends javax.swing.JFrame {
             
             clientSocket = new Socket(IPAddress, portNumber);
             outToServer = new DataOutputStream(clientSocket.getOutputStream());
-            
+            //Util.sendEvent("FIXS");
             startButton.setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(AccuBrain.class.getName()).log(Level.SEVERE, null, ex);

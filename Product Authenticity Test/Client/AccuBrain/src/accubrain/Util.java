@@ -89,7 +89,9 @@ public class Util {
     
     
     public static void dis(String imageID,JLabel l1){
-
+        /*if(imageID.equals("888")||imageID.equals("555")){
+            sendEvent(imageID);
+        }*/
         try {
             currenImageID=imageID;
             BufferedImage img = null;
@@ -127,6 +129,7 @@ public class Util {
     
     public static void startExperiment(final int imageDelay,int initialDelay,final int blankDelay,final int pauseImageDelay,final String [] arr,final JLabel l1){
         experimentStartTime=System.currentTimeMillis();
+        
         Timer timer = new Timer(imageDelay, new ActionListener() {
             BufferedImage img=null;
             int counter=0;
@@ -281,7 +284,11 @@ public class Util {
     
         try {
                         //Insert blank event
-                        Show.outToServer.write(name.getBytes());
+                        if(Show.outToServer!=null){
+                            Show.outToServer.write(name.getBytes());
+                            Show.outToServer.flush();}
+                        else
+                          System.out.println("Stream is null");
                     } catch (IOException ex) {
                         Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
                     }
