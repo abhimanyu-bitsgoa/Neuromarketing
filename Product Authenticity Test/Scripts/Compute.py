@@ -26,16 +26,16 @@ vrr=0
 total=len(data)
 for row in data:
 	if len(row[1])==4:
-		if ''.join([row[1][2],row[1][3]])=='FF':
+		if ''.join([row[1][2],row[1][3]])=='FD':
 			numff=numff+1
 			vff=vff+int(row[2])
-		elif ''.join([row[1][2],row[1][3]])=='FR':
+		elif ''.join([row[1][2],row[1][3]])=='FL':
 			numfr=numfr+1
 			vfr=vfr+int(row[2])
-		elif ''.join([row[1][2],row[1][3]])=='RF':
+		elif ''.join([row[1][2],row[1][3]])=='RD':
 			numrf=numrf+1
 			vrf=vrf+int(row[2])
-		elif ''.join([row[1][2],row[1][3]])=='RR':
+		elif ''.join([row[1][2],row[1][3]])=='RL':
 			numrr=numrr+1
 			vrr=vrr+int(row[2])
 	else:
@@ -43,24 +43,24 @@ for row in data:
 		dict[row[1][2]]=dict[row[1][2]]+1
 			
 if numff!=0:
-	print "FF has ",numff,float(vff)/numff
+	print "FD has ",numff,float(vff)/numff
 else:
-	print "FF has ",numff,"NA"
+	print "FD has ",numff,"NA"
 	
 if numfr!=0:
-	print "FR has ",numfr,float(vfr)/numfr
+	print "FL has ",numfr,float(vfr)/numfr
 else:
-	print "FR has ",numfr,"NA"
+	print "FL has ",numfr,"NA"
 	
 if numrf!=0:
-	print "RF has ",numrf,float(vrf)/numrf
+	print "RD has ",numrf,float(vrf)/numrf
 else:
-	print "RF has ",numrf,"NA"
+	print "RD has ",numrf,"NA"
 	
 if numrr!=0:
-	print "RR has ",numrr,float(vrr)/numrr,"\n"
+	print "RL has ",numrr,float(vrr)/numrr,"\n"
 else:
-	print "RR has ",numrr,"NA","\n"
+	print "RL has ",numrr,"NA","\n"
 	
 	
 print "Total : ",total
@@ -72,5 +72,5 @@ print "Missed with F : ",dict['F']
 print "Missed with R : ",dict['R']
 
     
-# FF FR RF RR 
+# FD FL RD RL 
 
