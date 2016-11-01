@@ -423,9 +423,9 @@ public class Show extends javax.swing.JFrame {
         }
     }
     
-    public void closeConnection(){
+    public static void closeConnection(){
         try {
-            outToServer.writeBytes("#" + '\n');
+            //outToServer.writeBytes("#" + '\n');
             outToServer.flush();
             clientSocket.close();
         } catch (IOException ex) {

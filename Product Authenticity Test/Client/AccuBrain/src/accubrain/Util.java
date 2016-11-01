@@ -166,7 +166,7 @@ public class Util {
                     experimentTotalTime=experimentEndTime-experimentStartTime;
                     printReactionTimes();
                     ((Timer)e.getSource()).stop();
-                    
+                    Show.closeConnection();//Graceful closing of socket
                     System.exit(0);
                 }
                 }
