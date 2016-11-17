@@ -242,7 +242,7 @@ public class Util {
                 int userResponse=currentImage.userResponse;
                 resultTuple+=+imageNumber+","+currentImageCode+","+imageReactionTime;
                 
-                if(userResponse==-1){
+                /*if(userResponse==-1){
                     resultTuple+=","+"Missed";
                 }
                 else if(userResponse==1){
@@ -253,15 +253,15 @@ public class Util {
                 else{
                     resultTuple+=","+"Incorrect";
                     total++;
-                }
+                }*/
                 writer.println(resultTuple);
             }
             writer.println("");
             writer.println("Total_Images , "+ImageData.getImageNames().length);
-            writer.println("Responded , "+total);
-            writer.println("Correct , "+correct);
-            writer.println("Incorrect , "+(total-correct));
-            writer.println("Accuracy , "+((((double)correct)/total)*100));
+            //writer.println("Responded , "+total);
+            //writer.println("Correct , "+correct);
+            //writer.println("Incorrect , "+(total-correct));
+            //writer.println("Accuracy , "+((((double)correct)/total)*100));
             writer.println("Experiment_time , "+experimentTotalTime/1000);
             System.out.println("File created successfully");
             writer.close();
