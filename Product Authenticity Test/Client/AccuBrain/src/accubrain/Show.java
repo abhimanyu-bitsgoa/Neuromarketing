@@ -280,25 +280,27 @@ public class Show extends javax.swing.JFrame {
         if(evt.getButton() == MouseEvent.BUTTON1){
 	      data=(Util.currenImageID+"L").getBytes();
               codeString=Util.currenImageID+"L";
+              Util.lastImageCode="L";
               //System.out.println("Left");
-              if(Util.currenImageID.charAt(2)=='R'){
-                 Util.currentImageObject.userResponse=1;
-              }else{
-                 Util.currentImageObject.userResponse=0;
-              }
+//              if(Util.currenImageID.charAt(2)=='R'){
+//                 Util.currentImageObject.userResponse=1;
+//              }else{
+//                 Util.currentImageObject.userResponse=0;
+//              }
                
               
 	    }	    
 	    else if(evt.getButton() == MouseEvent.BUTTON3){
 	      data=(Util.currenImageID+"D").getBytes();
               codeString=Util.currenImageID+"D";
+              Util.lastImageCode="D";
                //System.out.println("Right");
                
-              if(Util.currenImageID.charAt(2)=='F'){
-                 Util.currentImageObject.userResponse=1;
-              }else{
-                 Util.currentImageObject.userResponse=0;
-              }
+//              if(Util.currenImageID.charAt(2)=='F'){
+//                 Util.currentImageObject.userResponse=1;
+//              }else{
+//                 Util.currentImageObject.userResponse=0;
+//              }
               
 	    }
         

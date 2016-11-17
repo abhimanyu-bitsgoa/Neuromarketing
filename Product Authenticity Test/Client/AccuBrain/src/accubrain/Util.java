@@ -55,6 +55,7 @@ public class Util {
     private static int imageBreakpoint2=62;
     static String fixature_ID="FIXS";
     static String pause_ID="PAUS";
+    static String lastImageCode="M";
     
     
     
@@ -144,6 +145,8 @@ public class Util {
                 if(index<arr.length){
                     
                     currentImageObject=ImageData.getCurrentImageObject();
+                    //sendEvent(" Q"+index+"Q ");
+                    sendEvent("Q"+arr[index]);
                     Util.dis(arr[index],l1);
                     Show.sendClick=true;
                     index++;
@@ -172,8 +175,10 @@ public class Util {
                 }
                 else{
                     //Insert Blank event here
-                    sendEvent(fixature_ID);
-                    
+                    //sendEvent(fixature_ID);
+                    sendEvent(lastImageCode+arr[index-1].charAt(2)+arr[index-1].charAt(0)+arr[index-1].charAt(1));
+                    //sendEvent(" |"+(index-1)+"| ");
+                    lastImageCode="M";
                     Util.dis(blankImageID,l1);
                     Show.sendClick=false;
                     counter++;
