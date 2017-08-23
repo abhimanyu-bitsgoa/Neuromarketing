@@ -288,15 +288,53 @@ public class Util {
     public static void sendEvent(String name){
     
         try {
-                        //Insert blank event
-                        if(Show.outToServer!=null){
-                            Show.outToServer.write(name.getBytes());
-                            Show.outToServer.flush();}
-                        else
-                          System.out.println("Stream is null");
-                    } catch (IOException ex) {
-                        Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+            //Appending the corresponding code to the final string that will be sent to the server.
+            name=appendCode(name);
+            
+            //Insert blank event
+            if(Show.outToServer!=null){
+                Show.outToServer.write(name.getBytes());
+                Show.outToServer.flush();}
+            else
+              System.out.println("Stream is null");
+        } catch (IOException ex) {
+            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static String appendCode(String name){
+       name=name+"#";
+       if(name.charAt(0)=='F'){
+           name=name+"1";
+       }else if(name.charAt(0)=='Q'&&name.charAt(3)=='R'){
+           name=name+"2";
+       }else if(name.charAt(0)=='Q'&&name.charAt(3)=='F'){
+           name=name+"3";
+       }else if(name.charAt(2)=='R'&&name.charAt(3)=='L'){
+           name=name+"4";
+       }else if(name.charAt(2)=='R'&&name.charAt(3)=='D'){
+           name=name+"5";
+       }else if(name.charAt(2)=='F'&&name.charAt(3)=='L'){
+           name=name+"6";
+       }else if(name.charAt(2)=='F'&&name.charAt(3)=='D'){
+           name=name+"7";
+       }else if(name.charAt(0)=='L'&&name.charAt(1)=='R'){
+           name=name+"8";
+       }else if(name.charAt(0)=='D'&&name.charAt(1)=='R'){
+           name=name+"9";
+       }else if(name.charAt(0)=='L'&&name.charAt(1)=='F'){
+           name=name+"10";
+       }else if(name.charAt(0)=='D'&&name.charAt(1)=='F'){
+           name=name+"11";
+       }else if(name.charAt(0)=='M'&&name.charAt(1)=='R'){
+           name=name+"77";
+       }else if(name.charAt(0)=='M'&&name.charAt(1)=='F'){
+           name=name+"78";
+       }else if(name.charAt(0)=='P'){
+           name=name+"-88";
+       }
+
+        return name;
     }
     
 }
