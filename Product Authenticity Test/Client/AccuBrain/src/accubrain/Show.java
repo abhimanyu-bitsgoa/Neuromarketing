@@ -48,7 +48,8 @@ public class Show extends javax.swing.JFrame {
     int pauseImageDelay=60;
     static boolean sendClick=false;
     static String blankImageID="555";
-    byte[] data;
+    //byte[] data;
+    String data;
     static Socket clientSocket;
     static DataOutputStream outToServer;
     String IPAddress="10.10.10.45";
@@ -278,7 +279,8 @@ public class Show extends javax.swing.JFrame {
             
             sendClick=false;
         if(evt.getButton() == MouseEvent.BUTTON1){
-	      data=(Util.currenImageID+"L").getBytes();
+//	      data=(Util.currenImageID+"L").getBytes();
+              data=(Util.currenImageID+"L");
               codeString=Util.currenImageID+"L";
               Util.lastImageCode="L";
               //System.out.println("Left");
@@ -291,7 +293,8 @@ public class Show extends javax.swing.JFrame {
               
 	    }	    
 	    else if(evt.getButton() == MouseEvent.BUTTON3){
-	      data=(Util.currenImageID+"D").getBytes();
+//	      data=(Util.currenImageID+"D").getBytes();
+              data=(Util.currenImageID+"D");
               codeString=Util.currenImageID+"D";
               Util.lastImageCode="D";
                //System.out.println("Right");
@@ -308,13 +311,14 @@ public class Show extends javax.swing.JFrame {
             
 
             
-            outToServer.write(data);
-            outToServer.flush();
+            //outToServer.write(data);
+            //outToServer.flush();
+            Util.sendEvent(data);
             Util.currentImageObject.imageCode=codeString;
             Util.currentImageObject.imageReactionTime=reactionTime;
 
             
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(Show.class.getName()).log(Level.SEVERE, null, ex);
         }
         

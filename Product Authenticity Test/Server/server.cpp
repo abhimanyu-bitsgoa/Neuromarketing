@@ -202,6 +202,7 @@ int main()
 
             for(int i=0;i<buffer.size();i++)
               cout<<buffer[i];
+              cout<<endl;
 
             if (*buffer.data() == '#') {
                 *buffer.data() = '*';
